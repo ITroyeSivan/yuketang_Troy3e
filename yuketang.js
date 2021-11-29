@@ -10,35 +10,35 @@
 
 // @获取所有视频id
 // @这一部分单独执行一遍，获取视频id
-// var flag = 1;
-// var page = 0;
-// var vedio_id = [];
-// while (flag){
-//     $(function () {
-//         $.ajax({
-//             type: "GET",
-//             async : false,
-//             url: "https://www.yuketang.cn/v2/api/web/logs/learn/8233437?actype=-1&page=" + page + "&offset=1",
-//             success: function (data) {
-//                 try{
-//                     temp_vedio_id = data["data"]["activities"][0]["content"]["leaf_id"];
-//                     vedio_id.push(temp_vedio_id);
-//                     //console.log(page);
-//                     page = page + 1;
-//                 }catch (e){
-//                     page = page + 1;
-//                 }
-//                 if (data["data"]["prev_id"] == -1){
-//                     flag = 0;
-//                 }
-//             },
-//             error: function () {
-//                 alert("发生甚么事了");
-//             }
-//         })
-//     });
-// }
-// console.log(vedio_id);
+var flag = 1;
+var page = 0;
+var vedio_id = [];
+while (flag){
+    $(function () {
+        $.ajax({
+            type: "GET",
+            async : false,
+            url: "https://www.yuketang.cn/v2/api/web/logs/learn/8233437?actype=-1&page=" + page + "&offset=1",
+            success: function (data) {
+                try{
+                    temp_vedio_id = data["data"]["activities"][0]["content"]["leaf_id"];
+                    vedio_id.push(temp_vedio_id);
+                    //console.log(page);
+                    page = page + 1;
+                }catch (e){
+                    page = page + 1;
+                }
+                if (data["data"]["prev_id"] == -1){
+                    flag = 0;
+                }
+            },
+            error: function () {
+                alert("发生甚么事了");
+            }
+        })
+    });
+}
+console.log(vedio_id);
 
 // @视频功能
 // @二倍速没搞成，希望有会的师傅教教我
@@ -56,7 +56,7 @@ setInterval(function (){
     window.location.href = vedio_address;
     text_schedule = document.querySelectorAll("span.text");
     vedio_schedule = text_schedule[1];
-    if (vedio_schedule.innerHTML !== "完成度：100%"){
+    if (typeof(document.getElementsByClassName("play-btn-tip")[0]) != 'undefined' && vedio_schedule.innerHTML !== "完成度：100%"){
         var start = document.getElementsByClassName("play-btn-tip")[0];
         if(start.innerText == "播放"){
             console.log("播放视频");
